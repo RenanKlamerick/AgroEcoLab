@@ -1,119 +1,113 @@
-const farmSimulator = (function() {
-  let farmGrid = [];
-  const gridSize = 10; // 10x10 cells
-  let currentMoney = 500;
-  let soilHealth = 80; // 0-100
-  let waterLevel = 100; // 0-100
-
-  const farmGridElement = document.getElementById('farm-grid');
-  const plantButton = document.getElementById('plant-button');
-  const waterButton = document.getElementById('water-button');
-  const harvestButton = document.getElementById('harvest-button');
-  const compostButton = document.getElementById('compost-button');
-
-  function init() {
-      generateFarmGrid();
-      setupEventListeners();
-      updateFarmStatusDisplay();
-      console.log('Simulador de fazenda inicializado.');
-  }
-
-  function generateFarmGrid() {
-      farmGridElement.innerHTML = ''; // Limpa o grid existente
-      farmGrid = [];
-      for (let i = 0; i < gridSize; i++) {
-          farmGrid[i] = [];
-          for (let j = 0; j < gridSize; j++) {
-              const cell = document.createElement('div');
-              cell.classList.add('farm-cell');
-              cell.dataset.row = i;
-              cell.dataset.col = j;
-              cell.dataset.content = 'empty'; // Pode ser 'empty', 'corn', 'bean', etc.
-              farmGridElement.appendChild(cell);
-              farmGrid[i][j] = { element: cell, content: 'empty' };
-          }
+const farmSimulator = (function () {
+    const gridSize = 10;
+    const farmGrid = [];
+    let mode = "plant";
+    let selectedCrop = "milho";
+    let money = 100;
+    let soilHealth = 80;
+    let waterLevel = 100;
+  
+    const grid = document.getElementById("farm-grid");
+    const cropSelect = document.getElementById("crop-select");
+    const soilSpan = document.getElementById("soil-health");
+    const waterSpan = document.getElementById("water-level");
+    const biodiversitySpan = document.getElementById("biodiversity");
+    const moneySpan = document.getElementById("money");
+  
+    function init() {
+      createGrid();
+      bindEvents();
+      updateStatus();
+    }
+  
+    function createGrid() {
+      grid.innerHTML = "";
+      for (let i = 0; i < gridSize * gridSize; i++) {
+        const cell = document.createElement("div");
+        cell.classList.add("farm-cell");
+        cell.dataset.state = "empty";
+        grid.appendChild(cell);
+        farmGrid.push(cell);
       }
-  }
-
-  function setupEventListeners() {
-      farmGridElement.addEventListener('click', handleCellClick);
-      plantButton.addEventListener('click', () => {
-          // Lógica para selecionar o que plantar e ativar o modo de plantio
-          console.log('Modo Plantar ativado.');
-          // Implementar lógica para permitir o clique em células para plantar
+    }
+  
+    function bindEvents() {
+      grid.addEventListener("click", (e) => {
+        if (e.target.classList.contains("farm-cell")) {
+          plantCrop(e.target);
+        }
       });
-      waterButton.addEventListener('click', () => {
-          console.log('Regando a fazenda.');
-          waterFarm();
+  
+      document.getElementById("plant-button").addEventListener("click", () => {
+        mode = "plant";
       });
-      harvestButton.addEventListener('click', () => {
-          console.log('Colhendo produtos.');
-          // Implementar lógica de colheita
+  
+      document.getElementById("water-button").addEventListener("click", water);
+      document.getElementById("harvest-button").addEventListener("click", harvest);
+      document.getElementById("compost-button").addEventListener("click", compost);
+  
+      cropSelect.addEventListener("change", () => {
+        selectedCrop = cropSelect.value;
       });
-      compostButton.addEventListener('click', () => {
-          console.log('Adicionando compostagem.');
-          addCompost();
-      });
-  }
-
-  function handleCellClick(event) {
-      const cell = event.target;
-      if (cell.classList.contains('farm-cell')) {
-          const row = parseInt(cell.dataset.row);
-          const col = parseInt(cell.dataset.col);
-          console.log(`Célula clicada: [${row}, ${col}]`);
-
-          // Exemplo: se o modo de plantio estiver ativo
-          // if (currentMode === 'plant' && farmGrid[row][col].content === 'empty') {
-          //     plantCrop(row, col, 'corn'); // Exemplo: plantar milho
-          // }
-      }
-  }
-
-  function plantCrop(row, col, cropType) {
-      if (currentMoney >= 10) { // Custo hipotético
-          farmGrid[row][col].content = cropType;
-          farmGrid[row][col].element.classList.add(`planted-${cropType}`);
-          currentMoney -= 10;
-          updateFarmStatusDisplay();
-          console.log(`Plantou ${cropType} em [${row}, ${col}]`);
+    }
+  
+    function plantCrop(cell) {
+      if (cell.dataset.state !== "empty") return;
+  
+      if (money >= 10) {
+        cell.classList.add(selectedCrop);
+        cell.dataset.state = selectedCrop;
+        money -= 10;
+        soilHealth -= 1;
+        updateStatus();
       } else {
-          alert('Dinheiro insuficiente para plantar!');
+        alert("Dinheiro insuficiente.");
       }
-  }
-
-  function waterFarm() {
+    }
+  
+    function water() {
       if (waterLevel > 0) {
-          waterLevel = Math.max(0, waterLevel - 10); // Gasta água
-          soilHealth = Math.min(100, soilHealth + 5); // Melhora um pouco a saúde do solo
-          updateFarmStatusDisplay();
-          console.log('Fazenda regada.');
+        waterLevel -= 10;
+        soilHealth += 2;
+        updateStatus();
       } else {
-          alert('Sem água suficiente para regar!');
+        alert("Sem água!");
       }
-  }
-
-  function addCompost() {
-      if (currentMoney >= 20) { // Custo hipotético
-          soilHealth = Math.min(100, soilHealth + 15); // Melhora significativamente a saúde do solo
-          currentMoney -= 20;
-          updateFarmStatusDisplay();
-          console.log('Compostagem adicionada.');
+    }
+  
+    function compost() {
+      if (money >= 15) {
+        soilHealth = Math.min(soilHealth + 10, 100);
+        money -= 15;
+        updateStatus();
       } else {
-          alert('Dinheiro insuficiente para compostagem!');
+        alert("Dinheiro insuficiente.");
       }
-  }
-
-  function updateFarmStatusDisplay() {
-      document.getElementById('soil-health').textContent = soilHealth + '%';
-      document.getElementById('water-level').textContent = waterLevel + '%';
-      document.getElementById('biodiversity-score').textContent = 'N/A'; // Lógica mais complexa para biodiversidade
-      document.getElementById('money').textContent = `R$ ${currentMoney.toFixed(2)}`;
-  }
-
-  return {
-      init: init,
-      plantCrop: plantCrop, // Pode ser acessado de fora para fins de debug ou UI
-      waterFarm: waterFarm
-  };
-})();
+    }
+  
+    function harvest() {
+      let harvested = 0;
+      farmGrid.forEach((cell) => {
+        if (cell.dataset.state !== "empty") {
+          cell.className = "farm-cell";
+          cell.dataset.state = "empty";
+          harvested += 1;
+        }
+      });
+  
+      money += harvested * 5;
+      updateStatus();
+    }
+  
+    function updateStatus() {
+      soilSpan.textContent = `${soilHealth}%`;
+      waterSpan.textContent = `${waterLevel}%`;
+      biodiversitySpan.textContent = `${Math.min(100, soilHealth / 2)}%`;
+      moneySpan.textContent = money.toFixed(2);
+    }
+  
+    return {
+      init,
+    };
+  })();
+  

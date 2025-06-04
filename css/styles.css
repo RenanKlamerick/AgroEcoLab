@@ -1,26 +1,27 @@
 body {
   font-family: Arial, sans-serif;
+  background-color: #f0f8f0;
+  color: #333;
   margin: 0;
   padding: 0;
-  background-color: #f0f8f0; /* Um verde claro suave */
-  color: #333;
 }
 
 header {
-  background-color: #4CAF50; /* Verde agroecológico */
+  background-color: #4caf50;
   color: white;
-  padding: 1em 0;
+  padding: 1em;
   text-align: center;
 }
 
 nav ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 nav ul li {
   display: inline;
-  margin: 0 15px;
+  margin: 0 10px;
 }
 
 nav a {
@@ -30,40 +31,46 @@ nav a {
 
 main {
   padding: 20px;
-  max-width: 1200px;
-  margin: 20px auto;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-section {
-  margin-bottom: 40px;
+  max-width: 1000px;
+  margin: auto;
 }
 
 #farm-grid {
   display: grid;
-  grid-template-columns: repeat(10, 50px); /* Exemplo: 10 colunas de 50px */
-  grid-template-rows: repeat(10, 50px); /* Exemplo: 10 linhas de 50px */
-  border: 1px solid #ccc;
-  width: 500px; /* 10 * 50px */
-  height: 500px; /* 10 * 50px */
-  margin: 20px auto;
-  background-color: #a0d8a0; /* Cor do solo inicial */
+  grid-template-columns: repeat(10, 50px);
+  grid-template-rows: repeat(10, 50px);
+  gap: 2px;
+  margin: 20px 0;
+  background-color: #a0d8a0;
+  border: 2px solid #ccc;
 }
 
 .farm-cell {
   width: 50px;
   height: 50px;
-  border: 1px solid #eee;
-  box-sizing: border-box; /* Garante que a borda não aumente o tamanho */
-  background-size: cover;
-  background-position: center;
+  border: 1px solid #ddd;
+  background-color: #f8fff0;
   cursor: pointer;
 }
 
-.farm-cell.planted-corn {
-  background-image: url('img/corn_seedling.png'); /* Imagem da planta */
+.farm-cell.milho {
+  background-color: #f4e842;
 }
 
-/* Adicionar mais estilos para diferentes tipos de solo, plantas, etc. */
+.farm-cell.feijao {
+  background-color: #4e944f;
+}
+
+.farm-cell.alface {
+  background-color: #a8d8a8;
+}
+
+#controls {
+  margin-bottom: 20px;
+}
+
+button,
+select {
+  margin: 5px;
+  padding: 8px 12px;
+}
