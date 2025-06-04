@@ -104,10 +104,43 @@ const farmSimulator = (function () {
       waterSpan.textContent = `${waterLevel}%`;
       biodiversitySpan.textContent = `${Math.min(100, soilHealth / 2)}%`;
       moneySpan.textContent = money.toFixed(2);
+      saveUserData({
+        money,
+        soilHealth,
+        waterLevel,
+        gridState: farmGrid.map(c => c.dataset.state),
+      });      
     }
   
+    function init(savedData = null) {
+        createGrid();
+        bindEvents();
+      
+        if (savedData) {
+          money = savedData.money;
+          soilHealth = savedData.soilHealth;
+          waterLevel = savedData.waterLevel;
+      
+          savedData.gridState.forEach((state, i) => {
+            const cell = farmGrid[i];
+            cell.dataset.state = state;
+            if (state !== "empty") {
+              cell.classList.add(state);
+            }
+          });
+        }
+      
+        updateStatus();
+      }
     return {
-      init,
+        init,
+        createGrid,
+        bindEvents,
+        plantCrop,
+        water,
+        compost,
+        harvest,
+        updateStatus      
     };
   })();
   
