@@ -1,0 +1,69 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f8f0; /* Um verde claro suave */
+  color: #333;
+}
+
+header {
+  background-color: #4CAF50; /* Verde agroecológico */
+  color: white;
+  padding: 1em 0;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+main {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 20px auto;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+section {
+  margin-bottom: 40px;
+}
+
+#farm-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 50px); /* Exemplo: 10 colunas de 50px */
+  grid-template-rows: repeat(10, 50px); /* Exemplo: 10 linhas de 50px */
+  border: 1px solid #ccc;
+  width: 500px; /* 10 * 50px */
+  height: 500px; /* 10 * 50px */
+  margin: 20px auto;
+  background-color: #a0d8a0; /* Cor do solo inicial */
+}
+
+.farm-cell {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #eee;
+  box-sizing: border-box; /* Garante que a borda não aumente o tamanho */
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+}
+
+.farm-cell.planted-corn {
+  background-image: url('img/corn_seedling.png'); /* Imagem da planta */
+}
+
+/* Adicionar mais estilos para diferentes tipos de solo, plantas, etc. */

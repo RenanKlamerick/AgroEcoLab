@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroEcoLab - Simulador de Fazenda Agroecológica</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>AgroEcoLab</h1>
+        <nav>
+            <ul>
+                <li><a href="#simulador">Simulador</a></li>
+                <li><a href="#biodiversidade">Biodiversidade</a></li>
+                <li><a href="#casos-de-sucesso">Casos de Sucesso</a></li>
+                <li><a href="#desafios">Desafios</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="simulador">
+            <h2>Sua Fazenda Agroecológica</h2>
+            <div id="farm-grid">
+                </div>
+            <div id="controls">
+                <h3>Controles da Fazenda</h3>
+                <button id="plant-button">Plantar</button>
+                <button id="water-button">Regar</button>
+                <button id="harvest-button">Colher</button>
+                <button id="compost-button">Compostar</button>
+                </div>
+            <div id="status-panel">
+                <h3>Status da Fazenda</h3>
+                <p>Saúde do Solo: <span id="soil-health"></span></p>
+                <p>Nível de Água: <span id="water-level"></span></p>
+                <p>Biodiversidade: <span id="biodiversity-score"></span></p>
+                <p>Dinheiro: <span id="money"></span></p>
+                </div>
+        </section>
+
+        <section id="biodiversidade">
+            <h2>Biblioteca de Biodiversidade</h2>
+            <div id="biodiversity-list">
+                </div>
+        </section>
+
+        <section id="casos-de-sucesso">
+            <h2>Casos de Sucesso</h2>
+            <div id="success-stories">
+                </div>
+        </section>
+
+        <section id="desafios">
+            <h2>Desafios e Quizzes</h2>
+            <div id="challenge-list">
+                </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 AgroEcoLab. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/farmSimulator.js"></script>
+    </body>
+</html>
