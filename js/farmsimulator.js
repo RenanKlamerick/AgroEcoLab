@@ -3,7 +3,7 @@ const farmSimulator = (function () {
     const farmGrid = [];
     let mode = "plant";
     let selectedCrop = "milho";
-    let money = 100;
+    let money = 500;
     let soilHealth = 80;
     let waterLevel = 100;
   
