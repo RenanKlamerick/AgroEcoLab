@@ -67,7 +67,23 @@ main {
 
 #controls {
   margin-bottom: 20px;
+  
 }
+#login-screen {
+  text-align: center;
+  padding: 30px;
+}
+
+#login-screen input {
+  padding: 10px;
+  width: 200px;
+}
+
+#login-screen button {
+  padding: 10px 20px;
+  margin-top: 10px;
+}
+
 
 button,
 select {
