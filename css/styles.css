@@ -98,6 +98,36 @@ main {
     opacity: 1;
   }
 }
+
+/* Fase 1 - Mudas */
+.fase0 {
+  filter: brightness(0.7) saturate(0.5);
+  background-size: contain;
+}
+
+/* Fase 2 - Crescendo */
+.fase1 {
+  filter: brightness(1) saturate(0.9);
+  transform: scale(1.05);
+}
+
+/* Fase 3 - Maduro */
+.fase2 {
+  filter: brightness(1.2) saturate(1.2);
+  border: 2px solid gold;
+  transform: scale(1.1);
+}
+.fase3 {
+  filter: brightness(1.4) saturate(1.5);
+  border: 2px solid green;
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+  from { transform: scale(1.1); }
+  to { transform: scale(1.2); }
+}
+
 #loja {
   margin-top: 40px;
   padding: 20px;

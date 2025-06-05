@@ -34,3 +34,4 @@ function saveUserData(data) {
   if (!currentUser) return;
   localStorage.setItem(`farm_${currentUser}`, JSON.stringify(data));
 }
+window.coletarAguaChuva = farmSimulator.coletarAguaChuva;

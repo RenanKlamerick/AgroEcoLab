@@ -56,6 +56,9 @@
         <p>Biodiversidade: <span id="biodiversity">--</span></p>
         <p>Dinheiro: R$ <span id="money">--</span></p>
       </div>
+      <div>
+        <button onclick="farmSimulator.coletarAguaChuva()">Coletar Água da Chuva</button>
+      </div>
     </section>
 
     <section id="biodiversidade">
@@ -95,9 +98,22 @@
             <p>Preço: R$10 / 5 unidades</p>
             <button onclick="comprarSemente('alface')">Comprar</button>
           </div>
+          <div id="farm-grid"></div>
+<span id="soil-health"></span>
+<span id="water-level"></span>
+<span id="biodiversity"></span>
+<span id="money"></span>
+<select id="crop-select">...</select>
+<button id="plant-button"></button>
+<button id="water-button"></button>
+<!-- etc -->
+          <div class="item">
+            <h3>🪴 Adubo Orgânico</h3>
+            <p>Preço: R$15 / 1 unidade</p>
+            <button onclick="comprarAdubo()">Comprar</button>
+          </div>
         </div>
       </section>
-      
   </main>
 
   <footer>
