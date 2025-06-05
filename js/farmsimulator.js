@@ -53,7 +53,6 @@ const farmSimulator = (function () {
   
     function plantCrop(cell) {
       if (cell.dataset.state !== "empty") return;
-  
       if (money >= 10) {
         cell.classList.add(selectedCrop);
         cell.dataset.state = selectedCrop;
@@ -63,6 +62,8 @@ const farmSimulator = (function () {
       } else {
         alert("Dinheiro insuficiente.");
       }
+      cell.classList.add(selectedCrop, "planted");
+setTimeout(() => cell.classList.remove("planted"), 400); // remove após a animação
     }
   
     function water() {
@@ -91,7 +92,10 @@ const farmSimulator = (function () {
         if (cell.dataset.state !== "empty") {
           cell.className = "farm-cell";
           cell.dataset.state = "empty";
-          harvested += 1;
+          harvested += 5; // cada colheita rende 5 unidades
+          soilHealth -= 2; // colheita reduz a saúde do solo
+            cell.classList.add("harvested");
+            setTimeout(() => cell.classList.remove("harvested"), 400); // remove após a animação
         }
       });
   
@@ -111,6 +115,42 @@ const farmSimulator = (function () {
         gridState: farmGrid.map(c => c.dataset.state),
       });      
     }
+    function abrirLoja() {
+        document.getElementById("store-modal").style.display = "flex";
+      }
+      
+      function fecharLoja() {
+        document.getElementById("store-modal").style.display = "none";
+      }
+      
+      function comprarSemente() {
+        if (money >= 10) {
+          alert("Semente comprada com sucesso!");
+          money -= 10;
+          updateStatus();
+        } else {
+          alert("Dinheiro insuficiente.");
+        }
+      }
+      
+      function comprarAgua() {
+        if (money >= 15) {
+          waterLevel = Math.min(waterLevel + 20, 100);
+          money -= 15;
+          updateStatus();
+        } else {
+          alert("Dinheiro insuficiente.");
+        }
+      }
+        function comprarComposto() {
+            if (money >= 20) {
+            soilHealth = Math.min(soilHealth + 15, 100);
+            money -= 20;
+            updateStatus();
+            } else {
+            alert("Dinheiro insuficiente.");
+            }
+        }      
   
     function init(savedData = null) {
         createGrid();
