@@ -87,6 +87,37 @@ main {
 .farm-cell.planted {
   animation: plantPop 0.4s ease;
 }
+.farm-cell:hover::after {
+  content: attr(title);
+  position: absolute;
+  font-size: 10px;
+  color: #000;
+  background: #fff;
+  padding: 2px 4px;
+  border-radius: 4px;
+  top: -20px;
+  left: 0;
+}
+.farm-cell {
+  position: relative; /* Adicionar isso */
+  /* ... resto das propriedades ... */
+}
+
+.farm-cell:hover::after {
+  content: attr(title);
+  position: absolute;
+  font-size: 10px;
+  color: #000;
+  background: #fff;
+  padding: 2px 4px;
+  border-radius: 4px;
+  top: -25px; /* Ajustado */
+  left: 50%; /* Centralizado */
+  transform: translateX(-50%); /* Centralizado */
+  white-space: nowrap;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
 
 @keyframes plantPop {
   0% {
@@ -171,10 +202,122 @@ main {
   padding: 10px 20px;
   margin-top: 10px;
 }
+.error {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.updated {
+  animation: highlight 1s ease;
+}
 
+@keyframes highlight {
+  from { background-color: #a5d6a7; }
+  to { background-color: transparent; }
+}
 
 button,
 select {
   margin: 5px;
   padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
+button:hover,
+select:hover {
+  background-color: #45a049;
+}
+/* Adicione ao final do arquivo existente */
+
+/* Estilos para estações */
+.spring-effect { background-color: #a8e6cf; }
+.summer-effect { background-color: #f7d486; }
+.autumn-effect { background-color: #e8a87c; }
+.winter-effect { background-color: #d4f1f9; }
+
+/* Animais */
+.animal {
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.animal.chicken {
+  background-image: url('../img/animals/chicken.png');
+}
+
+.animal.cow {
+  background-image: url('../img/animals/cow.png');
+}
+
+#animal-pen {
+  min-height: 100px;
+  border: 2px dashed #ccc;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #f9f9f9;
+}
+
+/* Notificações */
+.notification {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 1s;
+}
+
+.notification.fade-out {
+  opacity: 0;
+}
+
+/* Missões */
+.quest {
+  background-color: #e8f5e9;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+.quest.completed {
+  background-color: #c8e6c9;
+}
+
+.quest h4 {
+  margin: 0 0 5px 0;
+}
+
+.quest-progress {
+  height: 5px;
+  background-color: #81c784;
+  margin-top: 5px;
+  border-radius: 3px;
+}
+
+/* Efeitos sazonais */
+.season-indicator {
+  padding: 5px 10px;
+  border-radius: 15px;
+  color: white;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.spring-indicator { background-color: #4CAF50; }
+.summer-indicator { background-color: #FF9800; }
+.autumn-indicator { background-color: #795548; }
+.winter-indicator { background-color: #2196F3; }

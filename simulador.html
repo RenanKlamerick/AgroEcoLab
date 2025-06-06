@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulador AgroEcoLab</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Simulador de Fazenda Agroecológica</h1>
+  </header>
+
+  <main>
+    <section id="season-display">
+      <h3>Estação: <span id="current-season">Primavera</span></h3>
+      <p>Dia: <span id="current-day">1</span></p>
+      <button id="next-day-button">Próximo Dia</button>
+    </section>
+
+    <section id="simulador">
+      <h2>Olá, <span id="user-name"></span>!</h2>
+      <div id="farm-grid"></div>
+
+      <div id="controls">
+        <select id="crop-select">
+          <option value="milho">Milho</option>
+          <option value="feijao">Feijão</option>
+          <option value="alface">Alface</option>
+          <option value="tomate">Tomate</option>
+          <option value="abobora">Abóbora</option>
+          <option value="cenoura">Cenoura</option>
+          <option value="espinafre">Espinafre</option>
+        </select>
+        <button id="plant-button">Plantar</button>
+        <button id="water-button">Regar</button>
+        <button id="harvest-button">Colher</button>
+        <button id="compost-button">Compostar</button>
+        <button onclick="farmSimulator.coletarAguaChuva()">Coletar Água da Chuva</button>
+      </div>
+
+      <div id="status">
+        <p>Saúde do Solo: <span id="soil-health">--</span></p>
+        <p>Nível de Água: <span id="water-level">--</span></p>
+        <p>Biodiversidade: <span id="biodiversity">--</span></p>
+        <p>Dinheiro: R$ <span id="money">--</span></p>
+      </div>
+    </section>
+
+    <section id="animal-section">
+      <h3>Animais</h3>
+      <button onclick="farmSimulator.buyAnimal('chicken')">Comprar Galinha (R$30)</button>
+      <button onclick="farmSimulator.buyAnimal('cow')">Comprar Vaca (R$100)</button>
+      <div id="animal-pen"></div>
+    </section>
+
+    <section id="renewable-energy">
+      <h3>Energia Renovável</h3>
+      <button onclick="farmSimulator.buySolarPanel()">Comprar Painel Solar (R$200)</button>
+      <p>Painéis: <span id="solar-panels">0</span></p>
+    </section>
+
+    <section id="quests">
+      <h3>Missões</h3>
+      <div id="quest-list"></div>
+    </section>
+  </main>
+
+  <script src="js/farmSimulator.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const username = localStorage.getItem("lastUser");
+      if (!username) {
+        window.location.href = "login.html";
+        return;
+      }
+    
+      document.getElementById("user-name").textContent = username;
+      farmSimulator.init(loadUserData(username));
+    });
+  </script>
+</body>
+</html>
